@@ -11,9 +11,9 @@
     box-shadow: 5px 5px 12px rgba(0, 0, 0, 0.5);
     background-color: #333;
     color: #fff;
-  }
-  
-  .card .id {
+}
+
+.card .id {
     margin: 1em 0;
     background-color: #e33d33;
     border-radius: 5px;
@@ -22,15 +22,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .card .title {
+}
+
+.card .title {
     text-transform: capitalize;
     margin-bottom: 1em;
     font-size: 1.4em;
-  }
-  
-  .card .btn {
+}
+
+.card .btn {
     text-decoration: none;
     background-color: #fff;
     color: #222;
@@ -38,9 +38,9 @@
     border-radius: 5px;
     font-weight: bold;
     transition: 0.2s;
-  }
-  
-  .card .btn:hover {
+}
+
+.card .btn:hover {
     background-color: #e33d33;
     color: #fff;
-  }
+}

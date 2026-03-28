@@ -1,14 +1,19 @@
-import styles from "../styles/Navbar.module.css"
+import styles from "../styles/Navbar.module.css";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
     return (
         <nav className={styles.navbar}>
             <Link href="/" legacyBehavior>
                 <div className={styles.logo}>
-                    <Image src="/images/pokeball.png" width={30} height={30} alt="pokeball img"/>
+                    <Image
+                        src="/images/pokeball.png"
+                        width={30}
+                        height={30}
+                        alt="pokeball img"
+                    />
                     <h1>PokeNext</h1>
                 </div>
             </Link>
@@ -25,5 +30,5 @@ export default function Navbar() {
                 </li>
             </ul>
         </nav>
-    )
+    );
 }
