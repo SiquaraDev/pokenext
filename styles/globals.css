@@ -7,8 +7,20 @@
 
 body {
     background-color: rgb(240, 240, 240);
+    min-width: 320px;
+}
+
+html,
+body,
+#__next {
+    height: 100%;
+}
+
+#__next {
+    display: flex;
+    flex-direction: column;
 }
 
 .main-container {
-    min-height: 75vh;
+    flex: 1;
 }
