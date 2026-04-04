@@ -4,58 +4,9 @@
 
 ---
 
-## 📋 Índice
-
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Demonstração](#demonstração)
-- [Tecnologias](#tecnologias)
-- [Funcionalidades](#funcionalidades)
-- [Estrutura de Pastas](#estrutura-de-pastas)
-- [Como Executar](#como-executar)
-- [Páginas e Rotas](#páginas-e-rotas)
-- [Componentes](#componentes)
-- [Integração com a API](#integração-com-a-api)
-
----
-
 ## Sobre o Projeto
 
 O **PokeNext** é uma aplicação web que consome a [PokéAPI](https://pokeapi.co/) para exibir informações sobre os 151 Pokémons originais. O projeto foi desenvolvido como introdução ao **Next.js**, explorando recursos como geração estática de páginas (SSG), roteamento dinâmico e otimização de imagens.
-
----
-
-## Demonstração
-
-### 🏠 Página Inicial — Lista de Pokémons
-
-A home exibe cards com todos os 151 Pokémons da 1ª geração, cada um com imagem, número e nome.
-
-```
-/
-└── Grid de cards com todos os 151 Pokémons
-    ├── Imagem do sprite oficial
-    ├── Número (#001, #002...)
-    ├── Nome
-    └── Botão "Detalhes" → navega para a página individual
-```
-
-### 🔍 Página de Detalhes — Pokémon Individual
-
-Ao clicar em "Detalhes", o usuário é levado à página do Pokémon com informações completas.
-
-```
-/pokemon/[id]
-├── Nome
-├── Imagem (sprite oficial, 200x200)
-├── Número de Pokédex
-├── Tipo(s) — com badge colorido por tipo
-├── Altura (em cm)
-└── Peso (em kg)
-```
-
-### ℹ️ Página Sobre
-
-Uma página simples descrevendo o projeto, com uma imagem do Charizard.
 
 ---
 
@@ -82,44 +33,6 @@ Uma página simples descrevendo o projeto, com uma imagem do Charizard.
 - ✅ Layout consistente com Navbar e Footer em todas as páginas
 - ✅ Imagens otimizadas com o componente `next/image`
 - ✅ Navegação client-side com `next/link`
-
----
-
-## Estrutura de Pastas
-
-```
-pokenext/
-│
-├── components/
-│   ├── Card.js          # Card individual de cada Pokémon
-│   ├── Footer.js        # Rodapé com ano dinâmico
-│   ├── Layout.js        # Wrapper global (Navbar + main + Footer)
-│   └── Navbar.js        # Barra de navegação com logo e links
-│
-├── pages/
-│   ├── _app.js          # Componente raiz — aplica o Layout globalmente
-│   ├── index.js         # Home — lista todos os Pokémons
-│   ├── about.js         # Página "Sobre o Projeto"
-│   └── pokemon/
-│       └── [pokemonId].js  # Página dinâmica de detalhes do Pokémon
-│
-├── public/
-│   ├── favicon.ico
-│   └── images/
-│       ├── pokeball.png
-│       └── charizard.png
-│
-├── styles/
-│   ├── globals.css
-│   ├── Card.module.css
-│   ├── Footer.module.css
-│   ├── Home.module.css
-│   ├── Navbar.module.css
-│   ├── About.module.css
-│   └── Pokemon.module.css
-│
-└── README.md
-```
 
 ---
 
@@ -165,83 +78,37 @@ npm start
 
 ---
 
-## Páginas e Rotas
-
-| Rota           | Arquivo                        | Descrição                          |
-| -------------- | ------------------------------ | ---------------------------------- |
-| `/`            | `pages/index.js`               | Home com grid de todos os Pokémons |
-| `/about`       | `pages/about.js`               | Sobre o projeto                    |
-| `/pokemon/1`   | `pages/pokemon/[pokemonId].js` | Detalhes do Pokémon #1 (Bulbasaur) |
-| `/pokemon/25`  | `pages/pokemon/[pokemonId].js` | Detalhes do Pokémon #25 (Pikachu)  |
-| `/pokemon/151` | `pages/pokemon/[pokemonId].js` | Detalhes do Pokémon #151 (Mew)     |
-
----
-
-## Componentes
-
-### `<Layout>`
-
-Envolve todas as páginas da aplicação. Aplicado globalmente via `_app.js`.
-
-```jsx
-<Layout>
-    {/* Navbar */}
-    <main>{children}</main>
-    {/* Footer */}
-</Layout>
-```
-
-### `<Navbar>`
-
-Exibe o logo (pokeball + nome "PokeNext") e links para **Home** e **About**. Usa `next/link` para navegação sem recarregar a página.
-
-### `<Card>`
-
-Recebe um objeto `pokemon` como prop e exibe o sprite, número e nome. O botão "Detalhes" redireciona para `/pokemon/[id]`.
-
-```jsx
-<Card pokemon={{ id: 25, name: "pikachu" }} />
-```
-
-### `<Footer>`
-
-Exibe o nome do projeto e o ano atual, calculado dinamicamente com `new Date().getFullYear()`.
-
----
-
-## Integração com a API
-
-O projeto utiliza dois endpoints da [PokéAPI](https://pokeapi.co/):
-
-### 1. Listagem — `getStaticProps` em `index.js`
+## Estrutura de Pastas
 
 ```
-GET https://pokeapi.co/api/v2/pokemon/?limit=151
+pokenext/
+│
+├── components/
+│   ├── Card.js
+│   ├── Footer.js
+│   ├── Layout.js
+│   └── Navbar.js
+│
+├── pages/
+│   ├── _app.js
+│   ├── index.js
+│   ├── about.js
+│   └── pokemon/
+│       └── [pokemonId].js
+│
+├── public/
+│   └── images/
+│
+└── styles/
 ```
 
-Retorna os 151 primeiros Pokémons. O `id` é inferido pelo índice do array, já que a API não retorna esse campo na listagem.
-
-### 2. Detalhes — `getStaticProps` em `[pokemonId].js`
-
-```
-GET https://pokeapi.co/api/v2/pokemon/{id}
-```
-
-Retorna todos os dados do Pokémon: tipos, altura, peso, sprites, etc.
-
-### Sprites (Imagens)
-
-Os sprites são carregados diretamente do repositório público do PokeAPI no GitHub:
-
-```
-https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png
-```
+Para documentação técnica detalhada, consulte [DOCUMENTATION.md](./DOCUMENTATION.md).
 
 ---
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está sob a licença MIT.
 
 ---
 
